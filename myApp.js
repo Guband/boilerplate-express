@@ -3,7 +3,12 @@ const req = require('express/lib/request');
 const res = require('express/lib/response');
 let app = express();
 
-
+//#8
+app.use((req, res, next) =>{
+  console.log(`${req.method} ${req.path} ${req.ip}`);
+  next()
+}
+)
 
 
 
@@ -18,7 +23,7 @@ app.use('/public', express.static(__dirname + '/public'));
 //console.log('Hello World');
 
 
-/*/app.get("/json", (req, res) =>{
+app.get("/json", (req, res) =>{
 
   if(process.env.MESSAGE_STYLE="uppercase") {
 
@@ -31,12 +36,8 @@ app.use('/public', express.static(__dirname + '/public'));
   res.json(
     {"message": "Hello json"}
   )
-});*/
-app.use(function (req, res, next) {
-  var string = req.method + " " + req.path + " - " + req.ip;
-  next();
-}
-)
+});
+
 
 
 
